@@ -11,7 +11,7 @@ RUN set -eux; \
 RUN set -eux; \
 	/var/lucterios2/install.sh
 
-#RUN rm -f /var/lucterios2/install.sh
+RUN rm -f /var/lucterios2/install.sh
 
 COPY entrypoint.d /entrypoint.d/
 ENTRYPOINT ["/entrypoint.d/entrypoint.sh"]
