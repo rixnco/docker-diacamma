@@ -60,6 +60,20 @@ function run {
         echo "ALLOWED_HOSTS = [ '*' ]" >> ${CURRENT_ORGANISATION}/settings.py
     fi
 
+    if [ ! -f manage_${CURRENT_ORGANISATION}.py ]
+    then
+		cat > manage_${CURRENT_ORGANISATION}.py <<EOL
+#!/usr/bin/env python3" >> 
+import os
+import sys
+if __name__ == "__main__":
+	sys.path.append(os.path.dirname(__file__))
+	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "${CURRENT_ORGANISATION}.settings")
+	from django.core.management import execute_from_command_line
+	execute_from_command_line(sys.argv)
+EOL
+	fi
+
     source virtual_for_lucterios/bin/activate
     export DJANGO_SETTINGS_MODULE="${CURRENT_ORGANISATION}.settings"
 
